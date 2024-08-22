@@ -1,11 +1,24 @@
-import { createServer } from 'node:http'
+import { fastify } from 'fastify'
 
 
-const server = createServer((request, response) => {
-    response.write('oi')
-    console.log('oi')
+// create server
+const server = fastify()
 
-    return response.end()
+// create a default route
+// the route is identified by the first string inside server.get()
+// the given function will run whenever that route is included on the address
+// '/' means the default address (when no route is given)
+server.get('/', () => {
+    return 'Hello World!'
 })
 
-server.listen(3333)
+// create a 'hello' route
+server.get('/hello', () => {
+    return "Hello from the /hello route!"
+})
+
+// start listenning to the port
+// TODO: whay port must be a dictionary instead a number?
+server.listen({
+    port: 3333
+})

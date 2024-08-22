@@ -1,0 +1,9 @@
+import {} from 'node:some_module'
+// this is a syntax from npm modules
+// it requires the dev to run 'npm init -y' to start a npm package (?)
+// package.json will be created and will contain info on how to run the program
+// will also require the "type" key to be set to "module" inside package.json
+
+npm run dev
+// inside package.json is a "script" key, this contains scripts called with 'npm run script_name'
+// you can set a "dev" script inside it with the value 'node --watch server.js' to automatically update the server when somethin on the 'server.js' file changes

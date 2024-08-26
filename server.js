@@ -1,8 +1,11 @@
 import { fastify } from 'fastify'
+import { DataBase } from './database-memory.js'
 
 
 // create server
 const server = fastify()
+const database = new DataBase()
+
 
 // create a default route
 // the route is identified by the first string inside server.get()
@@ -12,13 +15,43 @@ server.get('/', () => {
     return 'Hello World!'
 })
 
-// create a 'hello' route
-server.get('/hello', () => {
-    return "Hello from the /hello route!"
+// route to register a user
+server.post('/user', (request, response) => {
+    const body = request.body
+
+    database.create(
+        body
+    )
+
+    return response.status(201).send()
+})
+
+// route to update user info
+server.put('/user/:id', (request, response) => {
+    const id = request.params.id
+    const body = request.body
+
+    const status = database.update(id, body)
+
+    return response.status(status).send()
+})
+
+// route to delete user info
+server.delete('/user/:id', (request, response) => {
+    const id = request.params.id
+
+    database.delete(id)
+    
+    return response.status(204).send()
+})
+
+// route to list registered users
+server.get('/user', () => {
+    return database.list()
 })
 
 // start listenning to the port
-// TODO: whay port must be a dictionary instead a number?
+// TODO: why port must be a dictionary instead a number?
 server.listen({
     port: 3333
 })

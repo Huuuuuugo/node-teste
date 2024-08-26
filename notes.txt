@@ -7,3 +7,12 @@ import {} from 'node:some_module'
 npm run dev
 // inside package.json is a "script" key, this contains scripts called with 'npm run script_name'
 // you can set a "dev" script inside it with the value 'node --watch server.js' to automatically update the server when somethin on the 'server.js' file changes
+
+
+
+
+
+TODO
+ver a diferença entre PATCH e PUT
+ver a diferença entre map e object
+eu preciso returnar o staus da resposta? response.satus(200).send() retorna imediatamente?

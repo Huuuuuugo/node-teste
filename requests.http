@@ -1,0 +1,30 @@
+# GET receber algo
+# POST criar algo
+# PUT alterar algo
+# PATCH alterar parte de algo
+# DELETE deletar algo
+
+###
+GET http://localhost:3333/user
+
+###
+POST http://localhost:3333/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "Hugo",
+    "idade": 20
+}
+
+###
+PUT http://localhost:3333/user/2616ae3e-9722-4fc7-9366-a649549fdaa4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "idade": 21,
+    "altura": 1.70,
+    "peso": 65.0
+}
+
+###
+DELETE http://localhost:3333/user/04d487bf-e48e-48fc-a2de-16b60aab22ce HTTP/1.1

@@ -1,5 +1,6 @@
 import { fastify } from 'fastify'
-import { DataBase } from './database-memory.js'
+// import { DataBase } from './database-memory.js'
+import { DataBase } from "./database-postgres.js";
 
 
 // create server
@@ -16,14 +17,12 @@ server.get('/', () => {
 })
 
 // route to register a user
-server.post('/user', (request, response) => {
+server.post('/user', async (request, response) => {
   const body = request.body
 
-  database.create(
-      body
-  )
+  const status = await database.create(body)
 
-  return response.status(201).send()
+  return response.status(status).send()
 })
 
 // route to update user info
@@ -37,19 +36,19 @@ server.put('/user/:id', (request, response) => {
 })
 
 // route to delete user info
-server.delete('/user/:id', (request, response) => {
+server.delete('/user/:id', async (request, response) => {
   const id = request.params.id
 
-  database.delete(id)
+  const status = await database.delete(id)
   
-  return response.status(204).send()
+  return response.status(status).send()
 })
 
 // route to list registered users
-server.get('/user', (request, response) => {
+server.get('/user', async (request, response) => {
   const filter = request.query.filter
 
-  return database.list(filter)
+  return await database.list(filter)
 })
 
 // start listenning to the port

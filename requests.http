@@ -8,6 +8,9 @@
 GET http://localhost:3333/user
 
 ###
+GET http://localhost:3333/user?filter=Hu
+
+###
 POST http://localhost:3333/user HTTP/1.1
 Content-Type: application/json
 
@@ -17,7 +20,16 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3333/user/2616ae3e-9722-4fc7-9366-a649549fdaa4 HTTP/1.1
+POST http://localhost:3333/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "Hidel",
+    "idade": 20
+}
+
+###
+PUT http://localhost:3333/user/873057b0-475e-4061-b5ad-0e2ab03dda16 HTTP/1.1
 Content-Type: application/json
 
 {

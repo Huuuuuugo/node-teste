@@ -4,12 +4,29 @@ import { randomUUID } from "node:crypto";
 export class DataBase {
     #entries = new Map()
 
-    list() {
+    list(filter = '') {
+        // apply filter
+        let inputArray = []
+        if (filter) {
+            inputArray = Array.from(this.#entries.entries()).filter((entriesArray) => {
+                if (entriesArray[1].nome.includes(filter)) {
+                    return true
+                }
+            })
+        }
+        else {
+            inputArray = Array.from(this.#entries)
+        }
+
         // return an array of objects
-        return Array.from(this.#entries).map((entriesArray) => {
+        return inputArray.map((entriesArray) => {
+            const id = entriesArray[0]
+            const values = entriesArray[1]
+
+
             return {
-                id: entriesArray[0],
-                ...entriesArray[1]
+                id: id,
+                ...values
             }
         })
 

@@ -46,8 +46,10 @@ server.delete('/user/:id', (request, response) => {
 })
 
 // route to list registered users
-server.get('/user', () => {
-    return database.list()
+server.get('/user', (request, response) => {
+    const filter = request.query.filter
+
+    return database.list(filter)
 })
 
 // start listenning to the port

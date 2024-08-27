@@ -12,48 +12,48 @@ const database = new DataBase()
 // the given function will run whenever that route is included on the address
 // '/' means the default address (when no route is given)
 server.get('/', () => {
-    return 'Hello World!'
+  return 'Hello World!'
 })
 
 // route to register a user
 server.post('/user', (request, response) => {
-    const body = request.body
+  const body = request.body
 
-    database.create(
-        body
-    )
+  database.create(
+      body
+  )
 
-    return response.status(201).send()
+  return response.status(201).send()
 })
 
 // route to update user info
 server.put('/user/:id', (request, response) => {
-    const id = request.params.id
-    const body = request.body
+  const id = request.params.id
+  const body = request.body
 
-    const status = database.update(id, body)
+  const status = database.update(id, body)
 
-    return response.status(status).send()
+  return response.status(status).send()
 })
 
 // route to delete user info
 server.delete('/user/:id', (request, response) => {
-    const id = request.params.id
+  const id = request.params.id
 
-    database.delete(id)
-    
-    return response.status(204).send()
+  database.delete(id)
+  
+  return response.status(204).send()
 })
 
 // route to list registered users
 server.get('/user', (request, response) => {
-    const filter = request.query.filter
+  const filter = request.query.filter
 
-    return database.list(filter)
+  return database.list(filter)
 })
 
 // start listenning to the port
 // TODO: why port must be a dictionary instead a number?
 server.listen({
-    port: 3333
+  port: 3333
 })

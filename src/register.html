@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register user</title>
+</head>
+<body>
+    <form id="registerForm" action="javascript:registerUser()" method="post">
+        <label for="nome">Nome:</label><br>
+        <input type="text" name="nome", id="nome"><br>
+
+        <label for="idade">Idade:</label><br>
+        <input type="text" name="idade", id="idade"><br>
+
+        <label for="altura">Altura:</label><br>
+        <input type="text" name="altura", id="altura"><br>
+
+        <label for="peso">Peso:</label><br>
+        <input type="text" name="peso", id="peso"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" name="email", id="email"><br>
+
+        <label for="senha">Senha:</label><br>
+        <input type="text" name="senha", id="senha"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function registerUser() {
+            const form = document.getElementById('registerForm')
+            const fdata = new FormData(form)
+            const data = Object.fromEntries(fdata.entries())
+
+            fetch('/user', { // URL of your server endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) // Convert form data to JSON
+            }).then(response => {
+                if (response.ok) {
+                    console.log(response.status); // Read response as text
+                } else {
+                    throw new Error(`Network response was not ok ${response.status}.`);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

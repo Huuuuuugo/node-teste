@@ -1,12 +1,21 @@
 import { fastify } from 'fastify'
-// import { DataBase } from './database-memory.js'
 import { DataBase } from "./database-postgres.js";
+import { fileURLToPath } from 'url'
+import path from 'node:path';
+import fs from "node:fs";
 
 
-// create server
+// create server and database
 const server = fastify()
 const database = new DataBase()
 
+// get constants
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+function readFile(filePath) {
+  return fs.createReadStream(path.join(__dirname, filePath))
+}
 
 // create a default route
 // the route is identified by the first string inside server.get()
@@ -49,6 +58,14 @@ server.get('/user', async (request, response) => {
   const filter = request.query.filter
 
   return await database.list(filter)
+})
+
+// route to register user
+// route to list registered users
+server.get('/user/register', async (request, response) => {
+
+  const html = readFile('src/register.html')
+  return response.type('text/html').send(html)
 })
 
 // start listenning to the port

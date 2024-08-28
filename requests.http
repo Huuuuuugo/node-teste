@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3333/user/162e2b41-c353-4902-8b07-bb78fc6316f2 HTTP/1.1
+DELETE http://localhost:3333/user/08158973-c25d-4afd-aadc-b4b52cb2a875 HTTP/1.1
 
 ###
 PUT http://localhost:3333/user/873057b0-475e-4061-b5ad-0e2ab03dda16 HTTP/1.1

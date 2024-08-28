@@ -54,5 +54,6 @@ server.get('/user', async (request, response) => {
 // start listenning to the port
 // TODO: why port must be a dictionary instead a number?
 server.listen({
-  port: 3333
+  server: '0.0.0.0',
+  port: process.env.port ?? 3333
 })
